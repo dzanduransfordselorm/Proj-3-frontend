@@ -1,0 +1,26 @@
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  // Ensure both nameValue and cohortValue have been selected
+  if (!nameValue || !cohortValue) {
+    alert("Please select both a student and a cohort.");
+    return;
+  }
+
+  // Set the search criteria
+  const dataToSend = {
+    Student: nameValue,
+    Cohort: cohortValue,
+  };
+
+  // Function to find matching objects
+  const findMatchingObject = (data, criteria) => {
+    return data.filter((item) =>
+      Object.keys(criteria).every((key) => item[key] === criteria[key])
+    );
+  };
+
+  // Perform the search and update the state
+  const matchedUsers = findMatchingObject(users, dataToSend);
+  setReturnedUser(matchedUsers);
+};
